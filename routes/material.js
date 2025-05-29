@@ -15,8 +15,8 @@ const router = express.Router();
 router.get("/site/:siteId", getMaterialsBySiteId);
 // router.post("/site/:siteId", verifyToken, createMaterialForSite); // Accepts siteId in body
 router.post("/site/:siteId", createMaterialForSite);
-router.get("/", verifyToken, getMaterials);
-router.get("/:id", verifyToken, getMaterial);
+router.get("/",  getMaterials);
+router.get("/:id",  getMaterial);
 // router.put("/:id", verifyToken, updateMaterial);
 router.put("/:id", updateMaterial);
 router.delete("/:id",  deleteMaterial);
