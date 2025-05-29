@@ -6,10 +6,10 @@ const LaborLogSchema = new mongoose.Schema({
     ref: 'Site', 
     required: true 
   },
-  // date: {
-  //   type: Date, 
-  //   default: Date.now 
-  // },
+   date: {
+     type: Date, 
+     default: Date.now 
+   },
   numberOfWorkers: {
     type: Number,
     required: true,

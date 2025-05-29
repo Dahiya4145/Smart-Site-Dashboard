@@ -12,10 +12,12 @@ import { verifyToken } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-router.post("/site/:siteId", verifyToken, createTask);
+// router.post("/site/:siteId", verifyToken, createTask);
+router.post("/site/:siteId", createTask);
 router.get("/", verifyToken, getTasks);
 router.get("/:id", verifyToken, getTask);
-router.put("/:id", verifyToken, updateTask);
-router.delete("/:id", verifyToken, deleteTask);
+// router.put("/:id", verifyToken, updateTask);
+router.put("/:id", updateTask);
+router.delete("/:id",  deleteTask);
 router.get("/site/:siteId", getTasksBySiteId);
 export default router;

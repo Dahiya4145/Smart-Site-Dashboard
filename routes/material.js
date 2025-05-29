@@ -13,10 +13,12 @@ const router = express.Router();
 
 // Routes for site-specific materials should come BEFORE dynamic :id routes
 router.get("/site/:siteId", getMaterialsBySiteId);
-router.post("/site/:siteId", verifyToken, createMaterialForSite); // Accepts siteId in body
+// router.post("/site/:siteId", verifyToken, createMaterialForSite); // Accepts siteId in body
+router.post("/site/:siteId", createMaterialForSite);
 router.get("/", verifyToken, getMaterials);
 router.get("/:id", verifyToken, getMaterial);
-router.put("/:id", verifyToken, updateMaterial);
-router.delete("/:id", verifyToken, deleteMaterial);
+// router.put("/:id", verifyToken, updateMaterial);
+router.put("/:id", updateMaterial);
+router.delete("/:id",  deleteMaterial);
 
 export default router;

@@ -15,7 +15,8 @@ import materialRoutes from "./routes/material.js";
 import taskRoutes from "./routes/tasks.js";
 import Site from "./models/Site.js";      // Site model for fetching latitude & longitude
 import visitorCounterRoute from "./routes/visitorCounter.js";
-
+import userRoute from "./routes/user.js";
+import notificationRoutes from "./routes/notification.js";  // <-- Added notification routes
 
 const app = express();
 dotenv.config();
@@ -56,7 +57,9 @@ app.use("/server/sites", siteRoutes);          // Site CRUD operations
 app.use("/server/labor", laborRoutes);         // Labor entries
 app.use("/server/materials", materialRoutes);  // Materials tracking
 app.use("/server/tasks", taskRoutes);          // Tasks & timelines
-app.use("/server", visitorCounterRoute);  // or "/api" or "/server/visitors"
+app.use("/server", visitorCounterRoute);       // Visitor counter
+app.use("/server/users", userRoute);            // Users
+app.use("/server/notifications", notificationRoutes);  // <-- Notification routes
 
 // 🌦 Weather API Configuration
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
@@ -74,13 +77,13 @@ const fetchAndEmitWeather = async () => {
         io.emit("weatherUpdate", {
           siteId: site._id,
           siteName: site.name,
-           weather: {
-             condition: response.data.current.condition.text,
-             icon: response.data.current.condition.icon,
-             temperature: response.data.current.temp_c,
-             windSpeed: response.data.current.wind_kph, // explicitly in KPH
-             humidity: response.data.current.humidity
-            }
+          weather: {
+            condition: response.data.current.condition.text,
+            icon: response.data.current.condition.icon,
+            temperature: response.data.current.temp_c,
+            windSpeed: response.data.current.wind_kph, // explicitly in KPH
+            humidity: response.data.current.humidity
+          }
         });
 
         console.log(`✅ Weather data emitted for site: ${site.name}`);
@@ -116,8 +119,11 @@ app.use((err, req, res, next) => {
 });
 
 // 🚀 Start server
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 7700;
 server.listen(PORT, () => {
   connect();
   console.log(`🚀 Server running on port ${PORT}`);
 });
+
+// Export io for use in controllers (e.g., to emit notifications)
+export { io };
