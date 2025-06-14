@@ -46,7 +46,7 @@ server/
 ### 📁 Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/Dahiya4145/smart-site-dashboard-server.git
+git clone https://github.com/Dahiya4145/Smart-Site-Dashboard.git
 cd smart-site-dashboard-server
 ````
 
